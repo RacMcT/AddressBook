@@ -1,84 +1,39 @@
-// 'use strict';
-
-// // brings in the assert module for unit testing
-// const assert = require('assert');
-// // brings in the readline module to access the command line
-// const readline = require('readline');
-// // use the readline module to print out to the command line
-// const rl = readline.createInterface({
-//   input: process.stdin,
-//   output: process.stdout
-// });
+// Use the API: https://randomuser.me/api/ to fetch a user now
+// Fetch a new user multiple times and store them in an array
+// Then list out all the users in your address book array by name and picture
+// Figure out how to fetch multiple users in one fetch request
+// Fetch multiple users on window load
+// Add a button to each user that when clicked displays the rest of their information like DOB, address and so forth
+// Once you have the functionality working, feel free to style and structure your address book with CSS and HTML
+// YOU KNOW HOW TO DO ALL OF THIS BY NOW. TRUST YOURSELF!!
 
 
-const pigLatin = () => {
-  let word = document.getElementById("input").value
-  word= word.toLowerCase().trim();
-  const vowels = ["a", "e", "i", "o", "u"];
+// Plan of Action:
 
-// holds new word for output
-  let pigWord=""; 
+// fetch json data from api to populate user Array
+// console.log array of Users - check that it is returning correctly
+// then push into DOM as an unordered list of users and thier contact information
+// fetch multiple users onload
+// push these multiple users to the DOM
+// add button that onClick populates rest of thier information
+// style so it looks nice? - once fully functional?!
 
-  //If it doesn't start with a vowel than by default it starts with a constanant- if/else statement
 
-  if(vowels.indexOf(word[0]) > -1){
-    pigWord = word + "yay";
-    return pigWord;
-  } else{
-    let firstMatch = word.match(/[aeiou]/g) || 0;
-    let vowels = word.indexOf (firstMatch [0]);
-    pigWord = word.substring(vowels) + word.substring(0,vowels) + "ay";
-    return document.getElementById("translation").innerHTML += pigWord; 
-  }
+const fetch = require('node-fetch');
 
+let getUser = () =>{
+fetch('https://randomuser.me/api/') 
+  .then((response) => response.json())
+  .then((json) => userArr = json)
+}
+
+const addLog = ()=> {
+  console.log(userArr)
+}
+
+ let userArr = [];
+  userArr.push(user);
   
-  }
 
-// the first function called in the program to get an input from the user
-// to run the function use the command: node main.js
-// to close it ctrl + C
-// const getPrompt = () => {
-//   rl.question('word ', (answer) => {
-//     console.log( pigLatin(answer) );
-//     getPrompt();
-//   });
-// }
-
-// // Unit Tests
-// // to use them run the command: npm test main.js
-// // to close them ctrl + C
-// if (typeof describe === 'function') {
-
-//   describe('#pigLatin()', () => {
-//     it('should translate a simple word', () => {
-//       assert.equal(pigLatin('car'), 'arcay');
-//       assert.equal(pigLatin('dog'), 'ogday');
-//     });
-//     it('should translate a complex word', () => {
-//       assert.equal(pigLatin('create'), 'eatecray');
-//       assert.equal(pigLatin('valley'), 'alleyvay');
-//     });
-//     it('should attach "yay" if word begins with vowel', () => {
-//       assert.equal(pigLatin('egg'), 'eggyay');
-//       assert.equal(pigLatin('emission'), 'emissionyay');
-//     });
-//     it('should lowercase and trim word before translation', () => {
-//       assert.equal(pigLatin('HeLlO '), 'ellohay');
-//       assert.equal(pigLatin(' RoCkEt'), 'ocketray');
-//     });
-//   });
-// } else {
-
-//   getPrompt();
-
-// }
-
-
-// **********
-//   HINTS
-// **********
-
-// break your code into pieces and focus on one piece at a time...
-// 1. if word begins with a vowel send to one function: adds "yay"
-// 2. if word begins with a consonant send to another function: splices off beginning, returns word with new ending.
-// 3. if multiple words, create array of words, loop over them, sending them to different functions and creating a new array with the new words.
+    // getUser()
+    // addLog()
