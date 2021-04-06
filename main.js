@@ -19,21 +19,24 @@
 // style so it looks nice? - once fully functional?!
 
 
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
 
-let getUser = () =>{
+let userList = []
+
+window.onload = function (){
+  getUser()
+}
+
+let getUser = () => {
 fetch('https://randomuser.me/api/') 
   .then((response) => response.json())
-  .then((json) => userArr = json)
+  .then((user) => (userList.push(user)))
 }
 
-const addLog = ()=> {
-  console.log(userArr)
+let consoleUsers = () => {
+  console.log(userList)
 }
 
- let userArr = [];
-  userArr.push(user);
-  
+consoleUsers()
+// getUser()
 
-    // getUser()
-    // addLog()
