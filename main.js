@@ -10,11 +10,11 @@
 
 // Plan of Action:
 
-// fetch json data from api to populate user Array
-// console.log array of Users - check that it is returning correctly
+// fetch json data from api to populate user posts Array
+// console.log array of Users/Posts - check that it is returning correctly
 // then push into DOM as an unordered list of users and thier contact information
 // fetch multiple users onload
-// push these multiple users to the DOM
+// push these multiple users/posts to the DOM
 // add button that onClick populates rest of thier information
 // style so it looks nice? - once fully functional?!
 
@@ -45,6 +45,8 @@ let moreInfo = (id) => {
   }
 }
 
+// this function works onClick for button to display "posts" from API of random people on screen
+
 let displayPeople = () => {
   let allPosts = document.getElementById("all-posts")
   arrayOfPeople.map((post, i) => {
@@ -64,7 +66,10 @@ let displayPeople = () => {
       `Name: ${post.name.first} ${post.name.last}`
     )
     const moreContactInfo = document.createTextNode(
-      `Phone: ${phone}, Email: ${email}, Address: ${location.street.number} ${location.street.name} ${location.city} ${location.state} ${location.postcode} ${location.country}, Birthday: ${dob.date}`
+      `Phone: ${phone},
+      Email: ${email}, 
+      Address: ${location.street.number} ${location.street.name} ${location.city} ${location.state} ${location.postcode} ${location.country}, 
+      Birthday: ${dob.date}`
     )
     li.appendChild(contactInfo)
     btn.appendChild(btnText)
@@ -75,7 +80,7 @@ let displayPeople = () => {
   })
 }
 
-// Console Logs the results
+// this function works onClick for console to display "posts" from API of random people
 const consolePeople = () => {
   console.log(arrayOfPeople)
 }
