@@ -19,26 +19,63 @@
 // style so it looks nice? - once fully functional?!
 
 
-// const fetch = require('node-fetch');
+let arrayOfPeople
 
-let userList = []
-
-
-
-window.onload = function (){
-  getUser()
+// This function waits for the web page to be loaded, when it does it will run the getPosts() function
+window.onload = function () {
+  getPeople()
 }
 
-let getUser = () => {
-fetch('https://randomuser.me/api/') 
-  .then((response) => response.json())
-  .then((user) => (userList.push(user)))
+// This function makes a fetch request to the URL inside its parameter brackets (). Then it will turn the response (data it's getting back), saved here as res. 
+//The res.json will be saved into the variable arrayOfPeople
+const getPeople = () => {
+  fetch(
+    "https://randomuser.me/api/?results=10&inc=name,location,phone,email,dob,picture"
+  )
+    .then((res) => res.json())
+    .then((people) => (arrayOfPeople = people.results))
 }
 
-let consoleUsers = () => {
-  console.log(userList)
+let moreInfo = (id) => {
+  let contact = document.getElementById(id)
+  if (contact.style.display === "block") {
+    contact.style.display = "none"
+  } else {
+    contact.style.display = "block"
+  }
 }
 
-consoleUsers()
-// getUser()
+let displayPeople = () => {
+  let allPosts = document.getElementById("all-posts")
+  arrayOfPeople.map((post, i) => {
+    const li = document.createElement("li")
+    const { name, phone, email, dob, location} = post
+    const btn = document.createElement("button") // creates button
+    const btnText = document.createTextNode("More Info") // creates button text
+    const paragraph = document.createElement("p") // myPara creates an HTML paragraph (<p>)
+    paragraph.setAttribute("id", `more-info-${i}`)
+    paragraph.style.display = "none"
+    li.setAttribute("id", "list")
+    btn.setAttribute("id", "btn")
+    btn.addEventListener("click", () => {
+      moreInfo(paragraph.id)
+    })
+    const contactInfo = document.createTextNode(
+      `Name: ${post.name.first} ${post.name.last}`
+    )
+    const moreContactInfo = document.createTextNode(
+      `Phone: ${phone}, Email: ${email}, Address: ${location.street.number} ${location.street.name} ${location.city} ${location.state} ${location.postcode} ${location.country}, Birthday: ${dob.date}`
+    )
+    li.appendChild(contactInfo)
+    btn.appendChild(btnText)
+    allPosts.append(li)
+    allPosts.append(btn)
+    paragraph.appendChild(moreContactInfo)
+    li.appendChild(paragraph)
+  })
+}
 
+// Console Logs the results
+const consolePeople = () => {
+  console.log(arrayOfPeople)
+}
